@@ -10,6 +10,7 @@
             text-align: center;
             padding: 50px;
             background-color: #f5f5f5;
+            position: relative;
         }
         .container {
             background: white;
@@ -36,16 +37,56 @@
         .fallback-link:hover {
             background-color: #005a87;
         }
+        .top-right-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 24px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+            z-index: 9999;
+        }
+        .arrow-pointer {
+            position: fixed;
+            top: 70px;
+            right: 25px;
+            font-size: 30px;
+            animation: bounce 1.5s infinite;
+            z-index: 9999;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
+    <!-- Visual indicator pointing to Teams menu -->
+    <div class="top-right-indicator">↗️</div>
+    <div class="arrow-pointer">👆</div>
+    
     <div class="container">
         <div class="loading">Opening Skedulo App...</div>
-        <div id="teams-warning" style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 15px; margin: 15px 0;">
-            <strong>📱 Instructions:</strong><br>
-            • <strong>In Microsoft Teams:</strong> Click "⋯" menu → "Open in browser" first<br>
-            • <strong>In regular browser:</strong> Click the button below<br>
-            • <strong>On mobile:</strong> Make sure Skedulo app is installed
+        <div id="teams-warning" style="background-color: #e3f2fd; border: 2px solid #2196f3; border-radius: 10px; padding: 20px; margin: 15px 0; text-align: center;">
+            <h3 style="margin-top: 0; color: #1976d2;">📱 One More Step!</h3>
+            <div style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <strong>If viewing in Microsoft Teams:</strong><br>
+                <span style="font-size: 18px;">👆 Tap the <strong>↗️</strong> icon in the top-right corner</span>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <strong>If already in a browser:</strong><br>
+                <span style="font-size: 18px;">👇 Just tap the button below!</span>
+            </div>
         </div>
         <p>If the app doesn't open automatically:</p>
         <a href="skedulox://agenda" class="fallback-link">Click here to open Skedulo</a>
