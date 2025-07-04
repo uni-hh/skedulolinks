@@ -41,24 +41,54 @@
 <body>
     <div class="container">
         <div class="loading">Opening Skedulo App...</div>
-        <div id="teams-warning" style="display: none; background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 15px; margin: 15px 0;">
-            <strong>📱 Viewing in Microsoft Teams?</strong><br>
-            Click the "⋯" menu → "Open in browser" first, then click the link below.
+        <div id="teams-warning" style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 15px; margin: 15px 0;">
+            <strong>📱 Instructions:</strong><br>
+            • <strong>In Microsoft Teams:</strong> Click "⋯" menu → "Open in browser" first<br>
+            • <strong>In regular browser:</strong> Click the button below<br>
+            • <strong>On mobile:</strong> Make sure Skedulo app is installed
         </div>
         <p>If the app doesn't open automatically:</p>
         <a href="skedulox://agenda" class="fallback-link">Click here to open Skedulo</a>
     </div>
     
     <script>
-        // Check if running in Teams
-        if (navigator.userAgent.includes('Teams/') || window.location !== window.parent.location) {
+        // Better Teams detection
+        function isInTeams() {
+            // Check user agent for Teams
+            if (navigator.userAgent.includes('Teams/')) return true;
+            
+            // Check if in iframe (Teams embeds content)
+            if (window.self !== window.top) return true;
+            
+            // Check for Teams-specific properties
+            if (window.nativeInterface || window.microsoftTeams) return true;
+            
+            // Check URL parameters that Teams might add
+            if (window.location.href.includes('teams.microsoft.com')) return true;
+            
+            return false;
+        }
+
+        if (isInTeams()) {
             document.getElementById('teams-warning').style.display = 'block';
+            console.log('Teams detected!');
         } else {
             // Additional JavaScript fallback for regular browsers
             setTimeout(function() {
                 window.location.href = "skedulox://agenda";
             }, 1000);
+            console.log('Regular browser detected');
         }
+        
+        // Always show a fallback warning after 3 seconds if redirect didn't work
+        setTimeout(function() {
+            if (document.getElementById('teams-warning').style.display === 'none') {
+                document.getElementById('teams-warning').innerHTML = 
+                    '<strong>📱 Link not working?</strong><br>' +
+                    'Try opening this page in your phone\'s regular browser (Chrome, Safari, etc.)';
+                document.getElementById('teams-warning').style.display = 'block';
+            }
+        }, 3000);
     </script>
 </body>
 </html>
