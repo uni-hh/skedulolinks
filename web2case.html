@@ -7,47 +7,56 @@
   <title>Support Request</title>
 
   <style>
-    html, body { margin:0; padding:0; font-family: Arial, sans-serif; }
-    .wrap { padding: 16px; max-width: 700px; }
+    body { font-family: Arial, sans-serif; padding: 16px; }
     label { display:block; margin-top: 12px; font-weight: 600; }
-    input[type="text"], textarea {
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    textarea { min-height: 140px; resize: vertical; }
+    input, textarea { width: 100%; padding: 8px; }
+    textarea { min-height: 140px; }
     button { margin-top: 16px; padding: 10px 14px; }
   </style>
+
+  <script>
+    window.onload = function () {
+      // Prefer parent page if inside iframe, fallback to referrer
+      let returnUrl = document.referrer || window.location.href;
+
+      // Safety: only allow SharePoint URLs
+      if (!returnUrl.startsWith("https://")) {
+        returnUrl = "https://sunshinelgd.sharepoint.com/sites/UnissonHomePOC/SitePages/I-Need-Help.aspx";
+      }
+
+      document.getElementById("retURL").value = returnUrl;
+    };
+  </script>
 </head>
 
 <body>
-  <div class="wrap">
-    <form
-      action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000050BTd"
-      method="POST"
-      target="_top"
-    >
-      <input type="hidden" name="orgid" value="00DBo0000050BTd">
+  <form
+    action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000050BTd"
+    method="POST"
+    target="_top"
+  >
+    <input type="hidden" name="orgid" value="00DBo0000050BTd">
+    <input type="hidden" id="retURL" name="retURL" value="">
 
-      <!-- IMPORTANT: use a real success page (can be another GitHub Pages page) -->
-      <input type="hidden" name="retURL" value="https://uni-hh.github.io/skedulolinks/web2case-success.html">
+    <label for="name">Contact Name</label>
+    <input id="name" name="name" maxlength="80">
 
-      <label for="name">Contact Name</label>
-      <input id="name" maxlength="80" name="name" type="text" />
+    <label for="email">Email</label>
+    <input id="email" name="email" maxlength="80">
 
-      <label for="email">Email</label>
-      <input id="email" maxlength="80" name="email" type="text" />
+    <label for="phone">Phone</label>
+    <input id="phone" name="phone" maxlength="40">
 
-      <label for="subject">Subject</label>
-      <input id="subject" maxlength="80" name="subject" type="text" />
+    <label for="subject">Subject</label>
+    <input id="subject" name="subject" maxlength="80">
 
-      <label for="description">Description</label>
-      <textarea id="description" name="description"></textarea>
+    <label for="description">Description</label>
+    <textarea id="description" name="description"></textarea>
 
-      <input type="hidden" id="external" name="external" value="1" />
+    <input type="hidden" name="external" value="1">
 
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>
+
