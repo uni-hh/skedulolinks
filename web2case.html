@@ -1,39 +1,64 @@
-<form
-  action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000050BTd"
-  method="POST"
-  target="_top"
->
-  <input type="hidden" name="orgid" value="00DBo0000050BTd">
-  <input type="hidden" id="retURL" name="retURL" value="">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Support Request</title>
 
-<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
-
-<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
-
-<label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
-
-<label for="description">Description</label><textarea name="description"></textarea><br>
-
-<input type="hidden"  id="external" name="external" value="1" /><br>!-- your other fields... -->
-
-  <button type="submit">Submit</button>
-</form>
-
-<script>
-  window.addEventListener("load", () => {
-    // When embedded, SharePoint is typically the referrer
-    let returnUrl = document.referrer;
-
-    // Fallback if referrer is stripped
-    const FALLBACK = "https://tenant.sharepoint.com/sites/Intranet";
-
-    // Lock redirects to your SharePoint tenant to avoid open-redirect abuse
-    if (!returnUrl || !returnUrl.startsWith("https://tenant.sharepoint.com")) {
-      returnUrl = FALLBACK;
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; }
+    label { display:block; margin-top: 12px; font-weight: 600; }
+    input[type="text"], textarea {
+      width: 100%;
+      max-width: 600px;
+      padding: 8px;
+      box-sizing: border-box;
     }
+    textarea { min-height: 140px; }
+    button { margin-top: 16px; padding: 10px 14px; }
+  </style>
 
-    // Add a query flag so SharePoint can show a success banner
-    const sep = returnUrl.includes("?") ? "&" : "?";
-    document.getElementById("retURL").value = returnUrl + sep + "caseSubmitted=1";
-  });
-</script>
+  <script>
+    window.addEventListener("load", function () {
+      let returnUrl = document.referrer;
+      const FALLBACK = "hhttps://sunshinelgd.sharepoint.com/sites/UnissonHomePOC/SitePages/I-Need-Help.aspx";
+
+      // Lock redirects to SharePoint tenant only
+      if (!returnUrl || !returnUrl.startsWith("https://tenant.sharepoint.com")) {
+        returnUrl = FALLBACK;
+      }
+
+      const sep = returnUrl.includes("?") ? "&" : "?";
+      document.getElementById("retURL").value = returnUrl + sep + "caseSubmitted=1";
+    });
+  </script>
+</head>
+
+<body>
+  <form
+    action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000050BTd"
+    method="POST"
+    target="_top"
+  >
+    <input type="hidden" name="orgid" value="00DBo0000050BTd">
+    <input type="hidden" id="retURL" name="retURL" value="">
+
+    <label for="name">Contact Name</label>
+    <input id="name" maxlength="80" name="name" size="20" type="text" />
+
+    <label for="email">Email</label>
+    <input id="email" maxlength="80" name="email" size="20" type="text" />
+
+    <label for="subject">Subject</label>
+    <input id="subject" maxlength="80" name="subject" size="20" type="text" />
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description"></textarea>
+
+    <input type="hidden" id="external" name="external" value="1" />
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
