@@ -6,18 +6,15 @@
   <input type="hidden" name="orgid" value="00DBo0000050BTd">
   <input type="hidden" id="retURL" name="retURL" value="">
 
-    <label for="name">Contact Name</label>
-    <input id="name" name="name" maxlength="80">
+<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
 
-    <label for="email">Email</label>
-    <input id="email" name="email" maxlength="80">
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
 
-    <label for="subject">Subject</label>
-    <input id="subject" name="subject" maxlength="80">
+<label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
 
-    <label for="description">Description</label>
-    <textarea id="description" name="description"></textarea>
-  <!-- your other fields... -->
+<label for="description">Description</label><textarea name="description"></textarea><br>
+
+<input type="hidden"  id="external" name="external" value="1" /><br>!-- your other fields... -->
 
   <button type="submit">Submit</button>
 </form>
@@ -40,5 +37,3 @@
     document.getElementById("retURL").value = returnUrl + sep + "caseSubmitted=1";
   });
 </script>
-
-
