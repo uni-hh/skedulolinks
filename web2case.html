@@ -1,42 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Support Request</title>
-
-  <style>
-    body { font-family: Arial, sans-serif; padding: 16px; }
-    label { display:block; margin-top: 12px; font-weight: 600; }
-    input, textarea { width: 100%; padding: 8px; }
-    textarea { min-height: 140px; }
-    button { margin-top: 16px; padding: 10px 14px; }
-  </style>
-
-  <script>
-    window.onload = function () {
-      // Prefer parent page if inside iframe, fallback to referrer
-      let returnUrl = document.referrer || window.location.href;
-
-      // Safety: only allow SharePoint URLs
-      if (!returnUrl.startsWith("https://")) {
-        returnUrl = "https://sunshinelgd.sharepoint.com/sites/UnissonHomePOC/SitePages/I-Need-Help.aspx";
-      }
-
-      document.getElementById("retURL").value = returnUrl;
-    };
-  </script>
-</head>
-
-<body>
-  <form
-    action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000050BTd"
-    method="POST"
-    target="_top"
-  >
-    <input type="hidden" name="orgid" value="00DBo0000050BTd">
-    <input type="hidden" id="retURL" name="retURL" value="">
+<form
+  action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000050BTd"
+  method="POST"
+  target="_top"
+>
+  <input type="hidden" name="orgid" value="00DBo0000050BTd">
+  <input type="hidden" id="retURL" name="retURL" value="">
 
     <label for="name">Contact Name</label>
     <input id="name" name="name" maxlength="80">
@@ -44,19 +12,33 @@
     <label for="email">Email</label>
     <input id="email" name="email" maxlength="80">
 
-    <label for="phone">Phone</label>
-    <input id="phone" name="phone" maxlength="40">
-
     <label for="subject">Subject</label>
     <input id="subject" name="subject" maxlength="80">
 
     <label for="description">Description</label>
     <textarea id="description" name="description"></textarea>
+  <!-- your other fields... -->
 
-    <input type="hidden" name="external" value="1">
+  <button type="submit">Submit</button>
+</form>
 
-    <button type="submit">Submit</button>
-  </form>
-</body>
-</html>
+<script>
+  window.addEventListener("load", () => {
+    // When embedded, SharePoint is typically the referrer
+    let returnUrl = document.referrer;
+
+    // Fallback if referrer is stripped
+    const FALLBACK = "https://tenant.sharepoint.com/sites/Intranet";
+
+    // Lock redirects to your SharePoint tenant to avoid open-redirect abuse
+    if (!returnUrl || !returnUrl.startsWith("https://tenant.sharepoint.com")) {
+      returnUrl = FALLBACK;
+    }
+
+    // Add a query flag so SharePoint can show a success banner
+    const sep = returnUrl.includes("?") ? "&" : "?";
+    document.getElementById("retURL").value = returnUrl + sep + "caseSubmitted=1";
+  });
+</script>
+
 
