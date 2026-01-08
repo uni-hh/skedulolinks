@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Support Request</title>
+
+  <style>
+    html, body { margin:0; padding:0; font-family: Arial, sans-serif; }
+    .wrap { padding: 16px; max-width: 700px; }
+    label { display:block; margin-top: 12px; font-weight: 600; }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    button { margin-top: 16px; padding: 10px 14px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <form
+      action="https://unissondisability--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DBo0000222333"
+      method="POST"
+      target="_top"
+    >
+      <input type="hidden" name="orgid" value="00DBo0000222333">
+
+      <!-- IMPORTANT: use a real success page (can be another GitHub Pages page) -->
+      <input type="hidden" name="retURL" value="https://uni-hh.github.io/skedulolinks/web2case-success.html">
+
+      <label for="name">Contact Name</label>
+      <input id="name" maxlength="80" name="name" type="text" />
+
+      <label for="email">Email</label>
+      <input id="email" maxlength="80" name="email" type="text" />
+
+      <label for="phone">Phone</label>
+      <input id="phone" maxlength="40" name="phone" type="text" />
+
+      <label for="subject">Subject</label>
+      <input id="subject" maxlength="80" name="subject" type="text" />
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description"></textarea>
+
+      <input type="hidden" id="external" name="external" value="1" />
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
