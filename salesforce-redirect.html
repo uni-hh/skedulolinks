@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Open Salesforce Mobile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Salesforce Mobile</title>
 
 <style>
 body {
@@ -64,64 +64,29 @@ body {
 }
 
 .button {
-    display: inline-block;
+    display: block;
     background: #4B2E83;
     color: white;
     text-decoration: none;
     padding: 16px 26px;
     border-radius: 28px;
     font-weight: bold;
-    min-width: 240px;
+    margin: 14px auto;
+    max-width: 280px;
     box-shadow: 0 6px 14px rgba(75,46,131,0.22);
 }
 
-.button:hover {
-    background: #3E246D;
-}
-
-.divider {
-    height: 1px;
-    background: #e6ddf7;
-    margin: 32px 0;
-}
-
-.download-title {
+.button.secondary {
+    background: white;
     color: #4B2E83;
-    font-size: 1.45rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    border: 2px solid #4B2E83;
+    box-shadow: none;
 }
 
-.download-subtitle {
+.note {
     color: #666;
-    font-size: 1rem;
-    margin-bottom: 22px;
-}
-
-.store-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: center;
-}
-
-.store-badge {
-    display: inline-block;
-    background: #000;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    padding: 13px 22px;
-    min-width: 250px;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.store-badge small {
-    display: block;
-    font-size: 0.72rem;
-    opacity: 0.82;
+    font-size: 0.95rem;
+    margin-top: 25px;
 }
 
 @media (max-width: 480px) {
@@ -160,37 +125,21 @@ body {
     </div>
 
     <div class="subtitle">
-        Then tap the button below to open Salesforce Mobile.
+        After opening externally,<br>
+        tap one of the buttons below.
     </div>
 
     <a class="button" href="salesforce1://">
         Open Salesforce Mobile
     </a>
 
-    <div class="divider"></div>
+    <a class="button secondary"
+       href="https://unissondisability.lightning.force.com/lightning/n/DSP_Mobile_Home">
+        Open DSP Mobile Home
+    </a>
 
-    <div class="download-title">
-        Don't have Salesforce installed?
-    </div>
-
-    <div class="download-subtitle">
-        Download the Salesforce mobile app below.
-    </div>
-
-    <div class="store-buttons">
-        <a class="store-badge"
-           href="https://apps.apple.com/au/app/salesforce/id404249815"
-           target="_blank">
-            <small>Download on the</small>
-            App Store
-        </a>
-
-        <a class="store-badge"
-           href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
-           target="_blank">
-            <small>GET IT ON</small>
-            Google Play
-        </a>
+    <div class="note">
+        If one option doesn't work, try the other.
     </div>
 
 </div>
