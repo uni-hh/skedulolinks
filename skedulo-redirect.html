@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Opening Skedulo App...</title>
-    <meta http-equiv="refresh" content="0;url=skedulox://agenda">
+    <title>Open Skedulo Mobile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -30,69 +29,49 @@
         h1 {
             color: #4B2E83;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-size: 2rem;
         }
 
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #E7DFF6;
-            border-top: 4px solid #4B2E83;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+        .instruction {
+            color: #333;
+            font-size: 1.25rem;
+            line-height: 1.45;
+            margin: 20px 0;
         }
 
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
+        .instruction strong {
+            color: #4B2E83;
         }
 
-        .message {
-            color: #5f6b76;
-            font-size: 1.2rem;
-            line-height: 1.4;
-            margin: 25px 0;
+        .icon-callout {
+            background: #f5f0ff;
+            border: 1px solid #d7c8f5;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 24px 0;
+            color: #4B2E83;
+            font-size: 1.1rem;
+            line-height: 1.45;
         }
 
-        .open-btn {
-            display: inline-block;
-            background: #4B2E83;
-            color: white;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: bold;
-            margin: 10px 0 20px 0;
-            box-shadow: 0 6px 14px rgba(75,46,131,0.22);
-        }
-
-        .open-btn:hover {
-            background: #3E246D;
+        .icon-large {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
         }
 
         .tagline {
             color: #666;
             font-size: 0.95rem;
-            margin-top: 5px;
-        }
-
-        .teams-warning {
-            display: none;
-            background: #f5f0ff;
-            border: 1px solid #d7c8f5;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 20px 0;
-            color: #4B2E83;
-            line-height: 1.4;
+            margin-top: 18px;
         }
 
         .arrow-pointer {
             position: fixed;
             top: 20px;
             right: 25px;
-            font-size: 40px;
+            font-size: 44px;
             animation: bounce 1.5s infinite;
             z-index: 9999;
         }
@@ -113,38 +92,32 @@
                 font-size: 1.65rem;
             }
 
-            .message {
-                font-size: 1.05rem;
+            .instruction {
+                font-size: 1.1rem;
             }
 
             .arrow-pointer {
                 top: 14px;
                 right: 18px;
-                font-size: 36px;
+                font-size: 38px;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="arrow-pointer" id="arrow">👆</div>
+<div class="arrow-pointer">👆</div>
 
 <div class="container">
-    <h1>Opening Skedulo App</h1>
+    <h1>Open Skedulo Mobile</h1>
 
-    <div class="spinner"></div>
-
-    <div class="message">
-        We're trying to open your Skedulo agenda automatically.
+    <div class="instruction">
+        Tap the <strong>↗ icon in the top-right corner</strong> to open this page externally.
     </div>
 
-    <a href="skedulox://agenda" class="open-btn">
-        Open Skedulo App
-    </a>
-
-    <div id="teams-warning" class="teams-warning">
-        <strong>One More Step!</strong><br><br>
-        If viewing in Microsoft Teams, tap the ↗ icon in the top-right corner to open in your browser first.
+    <div class="icon-callout">
+        <span class="icon-large">👆</span>
+        Once opened externally, Skedulo Plus Mobile will launch.
     </div>
 
     <div class="tagline">
@@ -153,29 +126,22 @@
 </div>
 
 <script>
-function isInTeams() {
-    if (navigator.userAgent.includes('Teams/')) return true;
-    if (window.self !== window.top) return true;
-    if (window.nativeInterface || window.microsoftTeams) return true;
-    if (window.location.href.includes('teams.microsoft.com')) return true;
-    return false;
+// The Skedulo app can only be launched once this page is opened externally
+// from Microsoft Teams / SharePoint mobile webview.
+
+function isLikelyExternalBrowser() {
+    if (navigator.userAgent.includes('Teams/')) return false;
+    if (window.self !== window.top) return false;
+    if (window.nativeInterface || window.microsoftTeams) return false;
+    if (window.location.href.includes('teams.microsoft.com')) return false;
+    return true;
 }
 
-if (isInTeams()) {
-    document.getElementById('teams-warning').style.display = 'block';
-} else {
+if (isLikelyExternalBrowser()) {
     setTimeout(function() {
         window.location.href = "skedulox://agenda";
-    }, 1000);
+    }, 500);
 }
-
-setTimeout(function() {
-    const warning = document.getElementById('teams-warning');
-    if (warning.style.display === 'none') {
-        warning.innerHTML = '<strong>Link not working?</strong><br><br>Tap the icon in the top-right corner and open this page in Chrome or Safari.';
-        warning.style.display = 'block';
-    }
-}, 3000);
 </script>
 
 </body>
