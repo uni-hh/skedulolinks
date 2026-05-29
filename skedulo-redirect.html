@@ -1,134 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Open Skedulo Mobile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f3eef9;
-            padding: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Skedulo Plus</title>
 
-        .container {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 50px 40px;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(75,46,131,0.12);
-            border-top: 6px solid #4B2E83;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3eef9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-        h1 {
-            color: #4B2E83;
-            margin-top: 0;
-            margin-bottom: 16px;
-            font-size: 2rem;
-        }
+.container {
+    background: white;
+    max-width: 520px;
+    width: 100%;
+    border-radius: 24px;
+    border-top: 6px solid #4B2E83;
+    padding: 50px 35px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(75,46,131,0.12);
+}
 
-        .instruction {
-            color: #333;
-            font-size: 1.25rem;
-            line-height: 1.45;
-            margin: 20px 0;
-        }
+.arrow-pointer {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    font-size: 44px;
+    animation: bounce 1.5s infinite;
+    z-index: 9999;
+}
 
-        .instruction strong {
-            color: #4B2E83;
-        }
+@keyframes bounce {
+    0%,20%,50%,80%,100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
 
-        .icon-callout {
-            background: #f5f0ff;
-            border: 1px solid #d7c8f5;
-            border-radius: 16px;
-            padding: 20px;
-            margin: 24px 0;
-            color: #4B2E83;
-            font-size: 1.1rem;
-            line-height: 1.45;
-        }
+.finger {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
 
-        .icon-large {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 8px;
-        }
+.title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #4B2E83;
+    line-height: 1.25;
+    margin-bottom: 15px;
+}
 
-        .tagline {
-            color: #666;
-            font-size: 0.95rem;
-            margin-top: 18px;
-        }
+.subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 35px;
+}
 
-        .arrow-pointer {
-            position: fixed;
-            top: 20px;
-            right: 25px;
-            font-size: 44px;
-            animation: bounce 1.5s infinite;
-            z-index: 9999;
-        }
+.divider {
+    height: 1px;
+    background: #e6ddf7;
+    margin: 35px 0;
+}
 
-        @keyframes bounce {
-            0%,20%,50%,80%,100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
+.download-title {
+    color: #4B2E83;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 40px 25px;
-                border-radius: 20px;
-            }
+.download-subtitle {
+    color: #666;
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+}
 
-            h1 {
-                font-size: 1.65rem;
-            }
+.store-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
 
-            .instruction {
-                font-size: 1.1rem;
-            }
+.store-badge {
+    display: inline-block;
+    background: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    min-width: 260px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
 
-            .arrow-pointer {
-                top: 14px;
-                right: 18px;
-                font-size: 38px;
-            }
-        }
-    </style>
+.store-badge small {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .arrow-pointer {
+        font-size: 38px;
+        top: 14px;
+        right: 18px;
+    }
+}
+</style>
 </head>
+
 <body>
 
 <div class="arrow-pointer">👆</div>
 
 <div class="container">
-    <h1>Open Skedulo Mobile</h1>
 
-    <div class="instruction">
-        Tap the <strong>↗ icon in the top-right corner</strong> to open this page externally.
+    <div class="finger">👆</div>
+
+    <div class="title">
+        Tap the ↗ icon<br>
+        in the top-right corner
     </div>
 
-    <div class="icon-callout">
-        <span class="icon-large">👆</span>
-        Once opened externally, Skedulo Mobile will launch.
+    <div class="subtitle">
+        to open Skedulo Plus
     </div>
 
-    <div class="tagline">
-        Good people doing great things.
+    <div class="divider"></div>
+
+    <div class="download-title">
+        Don't have Skedulo Plus installed?
     </div>
+
+    <div class="download-subtitle">
+        Download the app below.
+    </div>
+
+    <div class="store-buttons">
+
+        <a class="store-badge"
+           href="https://apps.apple.com/au/app/skedulo-plus/id1587076668"
+           target="_blank">
+            <small>Download on the</small>
+            App Store
+        </a>
+
+        <a class="store-badge"
+           href="https://play.google.com/store/apps/details?id=com.skedulo.app.v3&hl=en_AU"
+           target="_blank">
+            <small>GET IT ON</small>
+            Google Play
+        </a>
+
+    </div>
+
 </div>
 
 <script>
-// The Skedulo app can only be launched once this page is opened externally
-// from Microsoft Teams / SharePoint mobile webview.
-
 function isLikelyExternalBrowser() {
     if (navigator.userAgent.includes('Teams/')) return false;
     if (window.self !== window.top) return false;
