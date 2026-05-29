@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Salesforce</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3eef9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    max-width: 520px;
+    width: 100%;
+    border-radius: 24px;
+    border-top: 6px solid #4B2E83;
+    padding: 50px 35px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(75,46,131,0.12);
+}
+
+.arrow-pointer {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    font-size: 44px;
+    animation: bounce 1.5s infinite;
+    z-index: 9999;
+}
+
+@keyframes bounce {
+    0%,20%,50%,80%,100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.finger {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #4B2E83;
+    line-height: 1.25;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 35px;
+}
+
+.divider {
+    height: 1px;
+    background: #e6ddf7;
+    margin: 35px 0;
+}
+
+.download-title {
+    color: #4B2E83;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.download-subtitle {
+    color: #666;
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+}
+
+.store-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.store-badge {
+    display: inline-block;
+    background: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    min-width: 260px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.store-badge small {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.desktop-message {
+    display: none;
+    color: #4B2E83;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@media (min-width: 900px) {
+    .mobile-content {
+        display: none;
+    }
+
+    .desktop-message {
+        display: block;
+    }
+
+    .arrow-pointer {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .arrow-pointer {
+        font-size: 38px;
+        top: 14px;
+        right: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="arrow-pointer">👆</div>
+
+<div class="container">
+
+    <div class="desktop-message">
+        Opening Salesforce...
+    </div>
+
+    <div class="mobile-content">
+        <div class="finger">👆</div>
+
+        <div class="title">
+            Tap the ↗ icon<br>
+            in the top-right corner
+        </div>
+
+        <div class="subtitle">
+            to open Salesforce
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="download-title">
+            Don't have Salesforce installed?
+        </div>
+
+        <div class="download-subtitle">
+            Download the Salesforce mobile app below.
+        </div>
+
+        <div class="store-buttons">
+
+            <a class="store-badge"
+               href="https://apps.apple.com/us/app/salesforce/id404249815"
+               target="_blank">
+                <small>Download on the</small>
+                App Store
+            </a>
+
+            <a class="store-badge"
+               href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
+               target="_blank">
+                <small>GET IT ON</small>
+                Google Play
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+const desktopSalesforceUrl = "https://unissondisability.lightning.force.com/lightning/page/home";
+const salesforceMobileDeepLink = "salesforce1://";
+
+function isMobileDevice() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isLikelyTeamsOrEmbedded() {
+    if (navigator.userAgent.includes('Teams/')) return true;
+    if (window.self !== window.top) return true;
+    if (window.nativeInterface || window.microsoftTeams) return true;
+    if (window.location.href.includes('teams.microsoft.com')) return true;
+    return false;
+}
+
+if (!isMobileDevice()) {
+    window.location.href = desktopSalesforceUrl;
+} else if (!isLikelyTeamsOrEmbedded()) {
+    setTimeout(function() {
+        window.location.href = salesforceMobileDeepLink;
+    }, 500);
+
+    setTimeout(function() {
+        window.location.href = desktopSalesforceUrl;
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
