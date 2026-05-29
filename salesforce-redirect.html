@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Open Salesforce Mobile</title>
+<title>Salesforce Mobile</title>
 
 <style>
 body {
@@ -19,93 +19,83 @@ body {
 
 .container {
     background: #ffffff;
-    max-width: 520px;
+    max-width: 700px;
     width: 100%;
     border-radius: 24px;
-    border-top: 6px solid #4B2E83;
-    padding: 45px 32px;
+    padding: 60px 40px;
     text-align: center;
     box-shadow: 0 12px 30px rgba(75,46,131,0.12);
 }
 
-.arrow-pointer {
-    position: fixed;
-    top: 20px;
-    right: 25px;
-    font-size: 44px;
-    animation: bounce 1.5s infinite;
-    z-index: 9999;
-}
-
-@keyframes bounce {
-    0%,20%,50%,80%,100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-}
-
-.finger {
-    font-size: 58px;
-    margin-bottom: 15px;
-}
-
 .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #4B2E83;
-    line-height: 1.25;
-    margin-bottom: 14px;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #5B0F75;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.gold-divider {
+    width: 140px;
+    height: 4px;
+    background: #E6B325;
+    border-radius: 2px;
+    margin: 28px auto 35px auto;
 }
 
 .subtitle {
-    color: #555;
-    font-size: 1.15rem;
-    line-height: 1.45;
-    margin-bottom: 28px;
+    color: #2F3A4A;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 50px;
 }
 
-.button {
-    display: block;
-    background: #4B2E83;
+.store-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.store-badge {
+    display: inline-block;
+    background: #5B0F75;
     color: white;
     text-decoration: none;
-    padding: 16px 26px;
-    border-radius: 28px;
-    font-weight: bold;
-    margin: 14px auto;
-    max-width: 280px;
-    box-shadow: 0 6px 14px rgba(75,46,131,0.22);
+    border-radius: 16px;
+    padding: 22px 30px;
+    min-width: 420px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    box-shadow: 0 6px 14px rgba(91,15,117,0.25);
+    transition: all 0.2s ease;
 }
 
-.button.secondary {
-    background: white;
-    color: #4B2E83;
-    border: 2px solid #4B2E83;
-    box-shadow: none;
+.store-badge:hover {
+    background: #4A0C5E;
+    transform: translateY(-2px);
 }
 
-.note {
-    color: #666;
-    font-size: 0.95rem;
-    margin-top: 25px;
-}
+@media (max-width: 768px) {
 
-@media (max-width: 480px) {
     .container {
-        padding: 42px 26px;
+        padding: 40px 25px;
     }
 
     .title {
-        font-size: 1.75rem;
+        font-size: 2.8rem;
     }
 
     .subtitle {
-        font-size: 1.05rem;
+        font-size: 1.1rem;
     }
 
-    .arrow-pointer {
-        font-size: 38px;
-        top: 14px;
-        right: 18px;
+    .store-badge {
+        min-width: 100%;
+        box-sizing: border-box;
+        font-size: 1.15rem;
+        padding: 18px 20px;
     }
 }
 </style>
@@ -113,33 +103,32 @@ body {
 
 <body>
 
-<div class="arrow-pointer">👆</div>
-
 <div class="container">
 
-    <div class="finger">👆</div>
+    <h1 class="title">
+        Salesforce Mobile
+    </h1>
 
-    <div class="title">
-        Tap the ↗ icon<br>
-        in the top-right corner
-    </div>
+    <div class="gold-divider"></div>
 
     <div class="subtitle">
-        After opening externally,<br>
-        tap one of the buttons below.
+        Open or download Salesforce Mobile using one of the links below.
     </div>
 
-    <a class="button" href="salesforce1://">
-        Open Salesforce Mobile
-    </a>
+    <div class="store-buttons">
 
-    <a class="button secondary"
-       href="https://unissondisability.lightning.force.com/lightning/n/DSP_Mobile_Home">
-        Open DSP Mobile Home
-    </a>
+        <a class="store-badge"
+           href="https://apps.apple.com/au/app/salesforce/id404249815"
+           target="_blank">
+            Open App Store
+        </a>
 
-    <div class="note">
-        If one option doesn't work, try the other.
+        <a class="store-badge"
+           href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
+           target="_blank">
+            Open Google Play Store
+        </a>
+
     </div>
 
 </div>
