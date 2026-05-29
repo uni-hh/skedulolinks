@@ -1,50 +1,199 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <title>Salesforce Mobile Test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Open Salesforce Mobile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 40px;
-        background: #f3eef9;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3eef9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: #ffffff;
+    max-width: 520px;
+    width: 100%;
+    border-radius: 24px;
+    border-top: 6px solid #4B2E83;
+    padding: 45px 32px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(75,46,131,0.12);
+}
+
+.arrow-pointer {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    font-size: 44px;
+    animation: bounce 1.5s infinite;
+    z-index: 9999;
+}
+
+@keyframes bounce {
+    0%,20%,50%,80%,100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.finger {
+    font-size: 58px;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4B2E83;
+    line-height: 1.25;
+    margin-bottom: 14px;
+}
+
+.subtitle {
+    color: #555;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    margin-bottom: 28px;
+}
+
+.button {
+    display: inline-block;
+    background: #4B2E83;
+    color: white;
+    text-decoration: none;
+    padding: 16px 26px;
+    border-radius: 28px;
+    font-weight: bold;
+    min-width: 240px;
+    box-shadow: 0 6px 14px rgba(75,46,131,0.22);
+}
+
+.button:hover {
+    background: #3E246D;
+}
+
+.divider {
+    height: 1px;
+    background: #e6ddf7;
+    margin: 32px 0;
+}
+
+.download-title {
+    color: #4B2E83;
+    font-size: 1.45rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.download-subtitle {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 22px;
+}
+
+.store-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.store-badge {
+    display: inline-block;
+    background: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 13px 22px;
+    min-width: 250px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.store-badge small {
+    display: block;
+    font-size: 0.72rem;
+    opacity: 0.82;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 42px 26px;
     }
 
-    .button {
-        display: inline-block;
-        background: #4B2E83;
-        color: white;
-        text-decoration: none;
-        padding: 16px 24px;
-        border-radius: 8px;
-        margin: 10px;
-        font-weight: bold;
+    .title {
+        font-size: 1.75rem;
     }
+
+    .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .arrow-pointer {
+        font-size: 38px;
+        top: 14px;
+        right: 18px;
+    }
+}
 </style>
-```
-
 </head>
+
 <body>
 
-```
-<h1>Salesforce Mobile Test</h1>
+<div class="arrow-pointer">👆</div>
 
-<p>After opening externally, tap one of the buttons below.</p>
+<div class="container">
 
-<a class="button" href="salesforce1://">
-    Test salesforce1://
-</a>
+    <div class="finger">👆</div>
 
-<br><br>
+    <div class="title">
+        Tap the ↗ icon<br>
+        in the top-right corner
+    </div>
 
-<a class="button" href="https://unissondisability.lightning.force.com/lightning/n/DSP_Mobile_Home">
-    Test Lightning URL
-</a>
-```
+    <div class="subtitle">
+        Then tap the button below to open Salesforce Mobile.
+    </div>
+
+    <a class="button" href="salesforce1://">
+        Open Salesforce Mobile
+    </a>
+
+    <div class="divider"></div>
+
+    <div class="download-title">
+        Don't have Salesforce installed?
+    </div>
+
+    <div class="download-subtitle">
+        Download the Salesforce mobile app below.
+    </div>
+
+    <div class="store-buttons">
+        <a class="store-badge"
+           href="https://apps.apple.com/au/app/salesforce/id404249815"
+           target="_blank">
+            <small>Download on the</small>
+            App Store
+        </a>
+
+        <a class="store-badge"
+           href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
+           target="_blank">
+            <small>GET IT ON</small>
+            Google Play
+        </a>
+    </div>
+
+</div>
 
 </body>
 </html>
