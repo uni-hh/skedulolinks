@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salesforce Mobile</title>
+<title>Salesforce</title>
 
 <style>
 body {
@@ -43,11 +43,44 @@ body {
     margin: 28px auto 35px auto;
 }
 
-.subtitle {
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #5B0F75;
+    margin-bottom: 10px;
+}
+
+.section-text {
     color: #2F3A4A;
-    font-size: 1.4rem;
+    font-size: 1.15rem;
     line-height: 1.5;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
+}
+
+.button {
+    display: inline-block;
+    background: #5B0F75;
+    color: white;
+    text-decoration: none;
+    border-radius: 16px;
+    padding: 20px 30px;
+    min-width: 420px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    box-shadow: 0 6px 14px rgba(91,15,117,0.25);
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    background: #4A0C5E;
+    transform: translateY(-2px);
+}
+
+.divider {
+    height: 1px;
+    background: #E6DDF7;
+    margin: 45px 0;
 }
 
 .store-buttons {
@@ -55,26 +88,6 @@ body {
     flex-direction: column;
     gap: 20px;
     align-items: center;
-}
-
-.store-badge {
-    display: inline-block;
-    background: #5B0F75;
-    color: white;
-    text-decoration: none;
-    border-radius: 16px;
-    padding: 22px 30px;
-    min-width: 420px;
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 600;
-    box-shadow: 0 6px 14px rgba(91,15,117,0.25);
-    transition: all 0.2s ease;
-}
-
-.store-badge:hover {
-    background: #4A0C5E;
-    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
@@ -87,15 +100,10 @@ body {
         font-size: 2.8rem;
     }
 
-    .subtitle {
-        font-size: 1.1rem;
-    }
-
-    .store-badge {
+    .button {
         min-width: 100%;
         box-sizing: border-box;
-        font-size: 1.15rem;
-        padding: 18px 20px;
+        font-size: 1.1rem;
     }
 }
 </style>
@@ -106,24 +114,48 @@ body {
 <div class="container">
 
     <h1 class="title">
-        Salesforce Mobile
+        Salesforce
     </h1>
 
     <div class="gold-divider"></div>
 
-    <div class="subtitle">
+    <!-- Desktop Section -->
+
+    <div class="section-title">
+        Salesforce Desktop
+    </div>
+
+    <div class="section-text">
+        Access Salesforce using your desktop web browser.
+    </div>
+
+    <a class="button"
+       href="https://unissondisability.lightning.force.com/lightning/page/home"
+       target="_blank">
+        Open Desktop Browser
+    </a>
+
+    <div class="divider"></div>
+
+    <!-- Mobile Section -->
+
+    <div class="section-title">
+        Salesforce Mobile
+    </div>
+
+    <div class="section-text">
         Open or download Salesforce Mobile using one of the links below.
     </div>
 
     <div class="store-buttons">
 
-        <a class="store-badge"
+        <a class="button"
            href="https://apps.apple.com/au/app/salesforce/id404249815"
            target="_blank">
             Open App Store
         </a>
 
-        <a class="store-badge"
+        <a class="button"
            href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
            target="_blank">
             Open Google Play Store
