@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salesforce</title>
+<title>Opening Salesforce</title>
 
 <style>
 body {
@@ -43,18 +43,11 @@ body {
     margin: 28px auto 35px auto;
 }
 
-.section-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #5B0F75;
-    margin-bottom: 10px;
-}
-
-.section-text {
+.status {
     color: #2F3A4A;
-    font-size: 1.15rem;
+    font-size: 1.35rem;
     line-height: 1.5;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
 }
 
 .button {
@@ -70,6 +63,7 @@ body {
     font-weight: 600;
     box-shadow: 0 6px 14px rgba(91,15,117,0.25);
     transition: all 0.2s ease;
+    margin: 10px 0;
 }
 
 .button:hover {
@@ -77,22 +71,16 @@ body {
     transform: translateY(-2px);
 }
 
-.store-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-}
-
-.desktop-note {
-    color: #5B0F75;
-    font-size: 1rem;
-    margin-top: 18px;
-}
-
-#mobile-content,
-#desktop-content {
+.fallback {
     display: none;
+    margin-top: 20px;
+}
+
+.fallback-title {
+    color: #5B0F75;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 
 @media (max-width: 768px) {
@@ -104,10 +92,15 @@ body {
         font-size: 2.8rem;
     }
 
+    .status {
+        font-size: 1.1rem;
+    }
+
     .button {
         min-width: 100%;
         box-sizing: border-box;
         font-size: 1.1rem;
+        padding: 18px 20px;
     }
 }
 </style>
@@ -117,48 +110,35 @@ body {
 
 <div class="container">
 
-    <h1 class="title">Salesforce</h1>
+    <h1 class="title">
+        Salesforce
+    </h1>
 
     <div class="gold-divider"></div>
 
-    <div id="desktop-content">
-        <div class="section-title">Salesforce Desktop</div>
+    <div id="status" class="status">
+        Detecting your device and opening the right Salesforce link...
+    </div>
 
-        <div class="section-text">
-            Opening Salesforce in your desktop browser.
+    <div id="fallback" class="fallback">
+        <div class="fallback-title">
+            If nothing opens automatically, choose an option below.
         </div>
 
         <a class="button"
-           href="https://unissondisability.lightning.force.com/lightning/page/home"
-           target="_blank">
-            Open Desktop Browser
+           href="https://unissondisability.lightning.force.com/lightning/page/home">
+            Open Salesforce Desktop
         </a>
 
-        <div class="desktop-note">
-            If you are not redirected automatically, use the button above.
-        </div>
-    </div>
+        <a class="button"
+           href="https://apps.apple.com/au/app/salesforce/id404249815">
+            Open App Store
+        </a>
 
-    <div id="mobile-content">
-        <div class="section-title">Salesforce Mobile</div>
-
-        <div class="section-text">
-            Open or download Salesforce Mobile using one of the links below.
-        </div>
-
-        <div class="store-buttons">
-            <a class="button"
-               href="https://apps.apple.com/au/app/salesforce/id404249815"
-               target="_blank">
-                Open App Store
-            </a>
-
-            <a class="button"
-               href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
-               target="_blank">
-                Open Google Play Store
-            </a>
-        </div>
+        <a class="button"
+           href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU">
+            Open Google Play Store
+        </a>
     </div>
 
 </div>
@@ -166,38 +146,39 @@ body {
 <script>
 (function () {
     const desktopUrl = "https://unissondisability.lightning.force.com/lightning/page/home";
+    const iosUrl = "https://apps.apple.com/au/app/salesforce/id404249815";
+    const androidUrl = "https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU";
 
     const ua = navigator.userAgent || "";
     const platform = navigator.platform || "";
     const maxTouchPoints = navigator.maxTouchPoints || 0;
 
-    const isPhone =
-        /iPhone|iPod/i.test(ua) ||
-        (/Android/i.test(ua) && /Mobile/i.test(ua));
-
-    const isTablet =
-        /iPad/i.test(ua) ||
-        (/Android/i.test(ua) && !/Mobile/i.test(ua) && maxTouchPoints > 0) ||
+    const isIOS =
+        /iPhone|iPad|iPod/i.test(ua) ||
         (platform === "MacIntel" && maxTouchPoints > 1);
 
-    const smallScreen =
-        Math.min(window.screen.width, window.screen.height) <= 900;
+    const isAndroid = /Android/i.test(ua);
 
-    const isMobileOrTablet =
-        (isPhone || isTablet) &&
-        (smallScreen || maxTouchPoints > 0);
+    let targetUrl = desktopUrl;
+    let message = "Opening Salesforce in your desktop browser...";
 
-    const desktopContent = document.getElementById("desktop-content");
-    const mobileContent = document.getElementById("mobile-content");
-
-    if (isMobileOrTablet) {
-        mobileContent.style.display = "block";
-    } else {
-        desktopContent.style.display = "block";
-        setTimeout(function () {
-            window.location.href = desktopUrl;
-        }, 300);
+    if (isIOS) {
+        targetUrl = iosUrl;
+        message = "Opening Salesforce in the App Store...";
+    } else if (isAndroid) {
+        targetUrl = androidUrl;
+        message = "Opening Salesforce in Google Play Store...";
     }
+
+    document.getElementById("status").textContent = message;
+
+    setTimeout(function () {
+        window.location.href = targetUrl;
+    }, 500);
+
+    setTimeout(function () {
+        document.getElementById("fallback").style.display = "block";
+    }, 2500);
 })();
 </script>
 
