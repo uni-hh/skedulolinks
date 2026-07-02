@@ -77,12 +77,6 @@ body {
     transform: translateY(-2px);
 }
 
-.divider {
-    height: 1px;
-    background: #E6DDF7;
-    margin: 45px 0;
-}
-
 .store-buttons {
     display: flex;
     flex-direction: column;
@@ -90,8 +84,18 @@ body {
     align-items: center;
 }
 
-@media (max-width: 768px) {
+.desktop-note {
+    color: #5B0F75;
+    font-size: 1rem;
+    margin-top: 18px;
+}
 
+#mobile-content,
+#desktop-content {
+    display: none;
+}
+
+@media (max-width: 768px) {
     .container {
         padding: 40px 25px;
     }
@@ -113,57 +117,89 @@ body {
 
 <div class="container">
 
-    <h1 class="title">
-        Salesforce
-    </h1>
+    <h1 class="title">Salesforce</h1>
 
     <div class="gold-divider"></div>
 
-    <!-- Desktop Section -->
+    <div id="desktop-content">
+        <div class="section-title">Salesforce Desktop</div>
 
-    <div class="section-title">
-        Salesforce Desktop
-    </div>
-
-    <div class="section-text">
-        Access Salesforce using your desktop web browser.
-    </div>
-
-    <a class="button"
-       href="https://unissondisability.lightning.force.com/lightning/page/home"
-       target="_blank">
-        Open Desktop Browser
-    </a>
-
-    <div class="divider"></div>
-
-    <!-- Mobile Section -->
-
-    <div class="section-title">
-        Salesforce Mobile
-    </div>
-
-    <div class="section-text">
-        Open or download Salesforce Mobile using one of the links below.
-    </div>
-
-    <div class="store-buttons">
+        <div class="section-text">
+            Opening Salesforce in your desktop browser.
+        </div>
 
         <a class="button"
-           href="https://apps.apple.com/au/app/salesforce/id404249815"
+           href="https://unissondisability.lightning.force.com/lightning/page/home"
            target="_blank">
-            Open App Store
+            Open Desktop Browser
         </a>
 
-        <a class="button"
-           href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
-           target="_blank">
-            Open Google Play Store
-        </a>
+        <div class="desktop-note">
+            If you are not redirected automatically, use the button above.
+        </div>
+    </div>
 
+    <div id="mobile-content">
+        <div class="section-title">Salesforce Mobile</div>
+
+        <div class="section-text">
+            Open or download Salesforce Mobile using one of the links below.
+        </div>
+
+        <div class="store-buttons">
+            <a class="button"
+               href="https://apps.apple.com/au/app/salesforce/id404249815"
+               target="_blank">
+                Open App Store
+            </a>
+
+            <a class="button"
+               href="https://play.google.com/store/apps/details?id=com.salesforce.chatter&hl=en_AU"
+               target="_blank">
+                Open Google Play Store
+            </a>
+        </div>
     </div>
 
 </div>
+
+<script>
+(function () {
+    const desktopUrl = "https://unissondisability.lightning.force.com/lightning/page/home";
+
+    const ua = navigator.userAgent || "";
+    const platform = navigator.platform || "";
+    const maxTouchPoints = navigator.maxTouchPoints || 0;
+
+    const isPhone =
+        /iPhone|iPod/i.test(ua) ||
+        (/Android/i.test(ua) && /Mobile/i.test(ua));
+
+    const isTablet =
+        /iPad/i.test(ua) ||
+        (/Android/i.test(ua) && !/Mobile/i.test(ua) && maxTouchPoints > 0) ||
+        (platform === "MacIntel" && maxTouchPoints > 1);
+
+    const smallScreen =
+        Math.min(window.screen.width, window.screen.height) <= 900;
+
+    const isMobileOrTablet =
+        (isPhone || isTablet) &&
+        (smallScreen || maxTouchPoints > 0);
+
+    const desktopContent = document.getElementById("desktop-content");
+    const mobileContent = document.getElementById("mobile-content");
+
+    if (isMobileOrTablet) {
+        mobileContent.style.display = "block";
+    } else {
+        desktopContent.style.display = "block";
+        setTimeout(function () {
+            window.location.href = desktopUrl;
+        }, 300);
+    }
+})();
+</script>
 
 </body>
 </html>
